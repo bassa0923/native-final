@@ -6,11 +6,16 @@ import {createStackNavigator} from '@react-navigation/stack';
 import LogIn from './screens/LogIn';
 import {Alert, StyleSheet} from 'react-native';
 import Mobile from './screens/Mobile';
-import Store from './redux/store';
+import {createStore} from 'redux';
+import allReducers from './redux/reducers';
+import Cart from './screens/Cart';
+
+const store = createStore(allReducers);
+
 function App() {
   const Stack = createStackNavigator();
   return (
-    <Provider store={Store}>
+    <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
           <Stack.Screen
@@ -22,6 +27,11 @@ function App() {
             name="Mobile"
             component={Mobile}
             options={{title: 'Mobile/Phone'}}
+          />
+          <Stack.Screen
+            name="Cart"
+            component={Cart}
+            options={{title: 'Your Cart'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

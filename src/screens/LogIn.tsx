@@ -4,7 +4,6 @@ import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {TextInput} from 'react-native-gesture-handler';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function LogIn({navigation}) {
   const [email, setEmail] = useState('');
@@ -26,7 +25,6 @@ function LogIn({navigation}) {
         },
       );
       setUser(response.data);
-      console.log(response.data);
     } catch (e) {
       setError(JSON.stringify(e.response.data));
     }
@@ -43,21 +41,14 @@ function LogIn({navigation}) {
         },
       );
       setToken(response.data?.access);
-      AsyncStorage.setItem('token', response.data?.access);
+      // AsyncStorage.setItem('token', response.data?.access);
       await getUser();
       navigation.navigate('Mobile');
     } catch (e) {
-      setError(JSON.stringify(e.response.data));
-      Alert.alert(error);
+      Alert.alert(JSON.stringify(e.response.data.detail));
+      setError(JSON.stringify(e.response.data.detail));
     }
   }
-
-  // useEffect(() => {
-  //   const userToken = AsyncStorage.getItem('token').then(t => {
-  //     Alert.alert(t);
-  //     getUser(t);
-  //   });
-  // }, []);
 
   return (
     <>
