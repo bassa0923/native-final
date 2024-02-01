@@ -67,12 +67,9 @@ function Mobile({navigation}) {
           {data.map((mobile, index) => {
             return (
               <View key={index} style={css.box}>
-                <FitImage
-                  style={css.image}
-                  source={{
-                    uri: mobile.image,
-                  }}
-                />
+                <View style={css.imageContainer}>
+                  <Image style={css.image} source={{uri: mobile.image}} />
+                </View>
                 <View>
                   <Text style={css.price}>
                     {mobile.stock.price.toFixed(2)}₾
@@ -125,14 +122,21 @@ const css = StyleSheet.create({
     paddingBottom: 80,
     paddingLeft: 12,
   },
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: 128,
+    height: 128,
+    resizeMode: 'contain',
+  },
   box: {
     width: '50%',
     padding: 23.5,
     borderWidth: 0.4,
     borderColor: '#ccbfbf',
-  },
-  image: {
-    borderRadius: 20,
   },
   price: {
     marginTop: 14,
