@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
-import FitImage from 'react-native-fit-image';
 import cartImage from '../image/card.png';
 import {
   ActivityIndicator,
@@ -14,7 +13,6 @@ import {
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
-import Spinner from 'react-native-loading-spinner-overlay';
 
 function Mobile({navigation}) {
   const [data, setData] = useState([]);
@@ -70,12 +68,26 @@ function Mobile({navigation}) {
                 <View style={css.imageContainer}>
                   <Image style={css.image} source={{uri: mobile.image}} />
                 </View>
-                <View>
-                  <Text style={css.price}>
-                    {mobile.stock.price.toFixed(2)}₾
+                <View style={css.mobileInfo}>
+                  {mobile.stock.price === mobile.stock.start_price ? (
+                    <View>
+                      <Text style={css.price}>
+                        {mobile.stock.start_price.toFixed(2)} ₾
+                      </Text>
+                    </View>
+                  ) : (
+                    <View style={css.startingPrice}>
+                      <Text style={css.priceText}>
+                        {mobile.stock.price.toFixed(2)} ₾
+                      </Text>
+                      <Text style={css.startingPriceText}>
+                        {mobile.stock.start_price.toFixed(2)} ₾
+                      </Text>
+                    </View>
+                  )}
+                  <Text numberOfLines={2} style={css.headline}>
+                    {mobile.headline}
                   </Text>
-                  {/* <Text>{mobile.stock.start_price}</Text> */}
-                  <Text style={css.headline}>{mobile.headline}</Text>
                 </View>
                 <TouchableOpacity
                   style={css.button}
@@ -93,7 +105,7 @@ function Mobile({navigation}) {
         style={css.cart}
         onPress={() => navigation.navigate('Cart')}>
         <View style={css.cartImage}>
-          <Image source={cartImage}></Image>
+          <Image source={cartImage} />
           <Text style={css.cartName}>My Cart</Text>
           {cartInfo && (
             <View style={css.productCountCircle}>
@@ -132,6 +144,14 @@ const css = StyleSheet.create({
     height: 128,
     resizeMode: 'contain',
   },
+  mobileInfo: {
+    flex: 1,
+    textAlign: 'center',
+    justifyContent: 'flex-start',
+    padding: 0,
+    margin: 0,
+    gap: 10,
+  },
   box: {
     width: '50%',
     padding: 23.5,
@@ -139,13 +159,27 @@ const css = StyleSheet.create({
     borderColor: '#ccbfbf',
   },
   price: {
-    marginTop: 14,
+    marginTop: 28,
     fontWeight: 'bold',
     color: 'black',
+  },
+  priceText: {
+    fontWeight: 'bold',
+    color: 'black',
+    marginRight: 10,
+  },
+  startingPriceText: {
+    textDecorationLine: 'line-through',
+  },
+  startingPrice: {
+    marginTop: 28,
+    flex: 1,
+    flexDirection: 'row',
   },
   headline: {
     color: 'black',
     fontWeight: '400',
+    flex: 1,
   },
   inner: {
     flex: 1,

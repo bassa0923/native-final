@@ -1,10 +1,8 @@
 import {Provider} from 'react-redux';
-import axios from 'axios';
-import React, {useState} from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import LogIn from './screens/LogIn';
-import {Alert, StyleSheet} from 'react-native';
 import Mobile from './screens/Mobile';
 import {createStore} from 'redux';
 import allReducers from './redux/reducers';
@@ -40,11 +38,3 @@ function App() {
 }
 
 export default App;
-
-// screenOptions={{headerShown: false}}
-
-const css = StyleSheet.create({
-  name: {
-    textAlign: 'center',
-  },
-});

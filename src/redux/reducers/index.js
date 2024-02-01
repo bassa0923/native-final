@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import cartInfoReducer from './cartInfo';
 import {combineReducers} from 'redux';
 

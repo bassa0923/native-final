@@ -2,7 +2,6 @@
 import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {connect} from 'react-redux';
-import FitImage from 'react-native-fit-image';
 import {ScrollView} from 'react-native-gesture-handler';
 
 function Cart({cartInfo}) {
@@ -28,8 +27,8 @@ function Cart({cartInfo}) {
           {cartInfo.products.map((product, index) => {
             return (
               <View key={index} style={css.box}>
-                <View style={css.img}>
-                  <FitImage
+                <View style={css.imageContainermg}>
+                  <Image
                     style={css.image}
                     source={{
                       uri: product.image,
@@ -90,12 +89,15 @@ const css = StyleSheet.create({
     borderWidth: 0.4,
     borderColor: '#ccbfbf',
   },
-  img: {
-    width: 80,
-    height: 120,
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
-    borderRadius: 20,
+    width: 128,
+    height: 128,
+    resizeMode: 'contain',
   },
   infoContainer: {
     width: '75%',
@@ -123,6 +125,7 @@ const css = StyleSheet.create({
     color: 'black',
     fontWeight: '400',
     fontSize: 12,
+    width: '80%',
   },
   totalAmountContainer: {
     flex: 1,
