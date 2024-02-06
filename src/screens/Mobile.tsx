@@ -27,7 +27,7 @@ function Mobile({navigation}) {
   const fetchData = async () => {
     try {
       const {data: response} = await axios.get(
-        'https://veli.store/_next/data/fdMYoHvQkb3JgXO6OYObC/ka/category/teqnika/mobilurebi-aqsesuarebi/mobiluri-telefonebi/60.json?type=teqnika&type=mobilurebi-aqsesuarebi&type=mobiluri-telefonebi&type=60',
+        'https://veli.store/_next/data/4HOftUV_YQDtD0v90i-3C/ka/category/teqnika/mobilurebi-aqsesuarebi/mobiluri-telefonebi/60.json?type=teqnika&type=mobilurebi-aqsesuarebi&type=mobiluri-telefonebi&type=60',
       );
       setData(response.pageProps.data.products);
     } catch (error) {
